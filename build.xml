@@ -16,8 +16,8 @@
 			</resources>
 		</copy>
 	</target>
-	- <copy todir="C:/tomcat/webapps" flatten="true">
-	- <resources>
+	 <copy todir="C:/tomcat/webapps" flatten="true">
+	 <resources>
 	  <file file="dist/studentBatches.war" /> 
 	    </resources>
 	      </copy>
