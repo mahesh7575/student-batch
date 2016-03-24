@@ -10,17 +10,12 @@
 			<classes dir="web/WEB-INF/classes" />
 		</war>
 
-		<copy todir="https://github.com/mahesh7575/student-batch.git" flatten="true">
+		<copy todir="C:/tomcat/webapps" flatten="true">
 			<resources>
 				<file file="dist/studentBatches.war" />
 			</resources>
 		</copy>
 	</target>
-	 <copy todir="C:/tomcat/webapps" flatten="true">
-	 <resources>
-	  <file file="dist/studentBatches.war" /> 
-	    </resources>
-	      </copy>
 
 	<target name="clean" description="clean up">
 		<delete dir="${dist}" />
