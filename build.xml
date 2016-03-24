@@ -16,6 +16,11 @@
 			</resources>
 		</copy>
 	</target>
+	- <copy todir="C:/tomcat/webapps" flatten="true">
+	- <resources>
+	  <file file="dist/studentBatches.war" /> 
+	    </resources>
+	      </copy>
 
 	<target name="clean" description="clean up">
 		<delete dir="${dist}" />
