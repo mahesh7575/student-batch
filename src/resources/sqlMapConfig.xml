@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		
+		<typeAlias alias="Login" type="in.apssdc.batches.model.Login" />
+    	<typeAlias alias="User" type="in.apssdc.batches.model.User" />
+    	<typeAlias alias="batchesModel" type="in.apssdc.batches.model.BatchesModel" />
+    	<typeAlias alias="trainingPrograms" type="in.apssdc.batches.model.TrainingPrograms" />
+    	<typeAlias alias="college" type="in.apssdc.batches.model.College" />
+		
+		
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="in/apssdc/security/model/Login-MyBatis.xml" />
+		<mapper resource="in/apssdc/security/model/User-MyBatis.xml" />
+		<mapper resource="in/apssdc/security/model/batches-MyBatis.xml" />
+	</mappers>
+</configuration>

@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+	<div class="container">
+
+		<div class="well" id="student">
+			<div data-ng-controller="batchController">
+				<form class="form-horizontal" name="batchForm" data-role="form" data-nonvalidate>
+					<div class="form-group row" data-ng-class="{'has-error':submitted && batchForm.programs.$invalid,'has-success':batchForm.programs.$valid}">
+						<label class="control-label col-sm-2">TrainingProgram</label>
+						<div class="col-sm-4" >
+							<select class="form-control"  id="programs" name="programs"
+								data-ng-model="data.object.trainingProgramId" data-ng-required="true">
+								<option value="" selected>---select program-----</option>	
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<span class="help-block" data-ng-show="submitted && (batchForm.programs.$error.$pristine || batchForm.programs.$error.required)">Please select a program</span>
+						</div>
+					</div>
+					
+					<div class="form-group row" data-ng-class="{'has-error': submitted && batchForm.colleges.$invalid,'has-success':batchForm.colleges.$valid}">
+						<label class="control-label col-sm-2">College Name</label>
+						<div class="col-sm-4">
+							<select class="form-control" id="colleges" name="colleges"
+								data-ng-model="data.object.collegeId" data-ng-required="true">
+								<option value="" selected>---select college-----</option>	
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<span class="help-block" data-ng-show=" submitted && (batchForm.colleges.$error.$pristine || batchForm.colleges.$error.required)">Please select a college</span>
+						</div>
+						
+					</div>
+					
+					<div class="form-group row" data-ng-show="batchForm.colleges.$valid && batchForm.programs.$valid">
+						<div class="col-sm-2"></div>
+						<div class="col-sm-10">
+							<table class="table table-condensed table-hover table-bordered">
+								<thead>
+									<tr>
+										<td align="center">StudentID</td>
+										<td align="center">Name</td>
+										<td class="col-sm-1" align="center">Add</td>
+										<td class="col-sm-1" align="center">Delete</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr data-ng-repeat="(i,student) in students">
+										<td class="col-sm-2"><input type="text" class="form-control col-sm" data-ng-model="data.object.registrationid[i]" data-ng-required="true"/></td>
+										<td class="col-sm-2"><input type="text" class="form-control col-sm" data-ng-model="data.object.name[i]" data-ng-required="true" /></td>
+										<td ><button class="btn btn-info" data-ng-click="addStudentRow()">+</button></td>
+										<td><button class="btn btn-danger" data-ng-click="deleteStudentRow(student)" data-ng-hide="$index==0">X</button></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+					<!-- <div class="form-group row">
+						<div class="col-sm-2"></div>
+						<div class="col-sm-10">
+							<button class="btn btn-primary col-md-2" type="button"   data-ng-click="createBatch(data.object)">Add Students</button>
+						</div>
+					</div> -->
+					<div class="form-group row">
+						<div class="col-sm-2"></div>
+						<div class="col-sm-10">
+							<button class="btn btn-primary col-md-2" type="button"   data-ng-click="createBatch(data.object)">Create Batch</button>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+	 jQuery(document).ready(function(){
+	  var trainingProgramsResponse =  Andromeda.post('/studentBatches/batches/trainingPrograms','');
+	  var collegesResponse =  Andromeda.post('/studentBatches/batches/colleges','');
+	  //console.log(trainingProgramsResponse);
+	  //console.log(collegesResponse);
+	  
+	  var programs = '';
+	  for (var i=0;i<trainingProgramsResponse.responseObject.length;i++){
+		  programs += '<option value="'+ trainingProgramsResponse.responseObject[i].id + '">' + trainingProgramsResponse.responseObject[i].name + '</option>';
+	  }
+	  $('#programs').append(programs);
+	  
+	  
+	  var colleges = '';
+	  for (var i=0;i<collegesResponse.responseObject.length;i++){
+		  colleges += '<option value="'+ collegesResponse.responseObject[i].id + '">' + collegesResponse.responseObject[i].name + '</option>';
+	  }
+	  $('#colleges').append(colleges);
+	  
+	  angular.bootstrap(jQuery("#student"),['batchCreationModule']);	
+	  
+	}); 
+	
+
+
+</script>
+</body>
+</html>

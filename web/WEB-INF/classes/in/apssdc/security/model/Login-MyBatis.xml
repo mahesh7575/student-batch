@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Login">
+    
+    <insert id="Add" parameterType="map">
+		INSERT INTO apssdc.logins
+		(appid, userName, context, logTime,batchid)
+		VALUES (#{p.collegeid},#{p.userName}, #{p.context},
+		#{p.logTime},#{p.batchid})
+	</insert>
+
+    <delete id="Del">
+        delete from apssdc.logins where appid = #{p.collegeid}
+    </delete>
+    
+	<select id="GetLoginByUserContext" resultType="Login"
+		parameterType="map">
+		SELECT appid as collegeid,userName,context,batchid FROM apssdc.logins WHERE userName = #{p.userName}
+		AND context = #{p.context}
+	</select>
+
+	<insert id="Reg" parameterType="map">
+		INSERT INTO register (name,
+		password, phno)
+		VALUES (#{p.name}, #{p.password}, #{p.phno})
+	</insert>
+
+</mapper>
