@@ -10,7 +10,7 @@
 			<classes dir="web/WEB-INF/classes" />
 		</war>
 
-		<copy todir="C:/tomcat/webapps" flatten="true">
+		<copy todir="/opt/Tomcat/apache-tomcat-8.0.32/webapps" flatten="true">
 			<resources>
 				<file file="dist/studentBatches.war" />
 			</resources>
